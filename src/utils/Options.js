@@ -61,7 +61,8 @@ export const evenDateOptions = [
     { key: "27", text: "27", value: "27" },
     { key: "28", text: "28", value: "28" },
     { key: "29", text: "29", value: "29" },
-    { key: "30", text: "30", value: "30" }
+    { key: "30", text: "30", value: "30" },
+    { key: "31", text: "31", value: "31" }
   ];
 
   export const februaryDateOptions = [
@@ -128,18 +129,18 @@ export const evenDateOptions = [
   ];
 
   export const monthsOptions = [
-    { key: "january", text: "January", value: "january" },
-    { key: "february", text: "February", value: "february" },
-    { key: "march", text: "March", value: "march" },
-    { key: "april", text: "April", value: "april" },
-    { key: "may", text: "May", value: "may" },
-    { key: "june", text: "June", value: "june" },
-    { key: "july", text: "July", value: "july" },
-    { key: "august", text: "August", value: "august" },
-    { key: "september", text: "September", value: "september" },
-    { key: "october", text: "October", value: "october" },
-    { key: "november", text: "November", value: "november" },
-    { key: "december", text: "December", value: "december" }
+    { key: "january", text: "January", value: "01" },
+    { key: "february", text: "February", value: "02" },
+    { key: "march", text: "March", value: "03" },
+    { key: "april", text: "April", value: "04" },
+    { key: "may", text: "May", value: "05" },
+    { key: "june", text: "June", value: "06" },
+    { key: "july", text: "July", value: "07" },
+    { key: "august", text: "August", value: "08" },
+    { key: "september", text: "September", value: "09" },
+    { key: "october", text: "October", value: "10" },
+    { key: "november", text: "November", value: "11" },
+    { key: "december", text: "December", value: "12" }
   ];
 
   export const yearOptions = [

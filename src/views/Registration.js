@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Segment, Header, Grid, Form, Input, Button } from "semantic-ui-react";
+import { Segment, Header, Grid, Form, Button, Dimmer } from "semantic-ui-react";
 import {
   evenDateOptions,
   oddDateOptions,
@@ -39,6 +39,10 @@ function Registration() {
   const [submittedYear, setSubmittedYear] = useState("1970");
   const [submittedEmail, setSubmittedEmail] = useState("");
 
+  // UI Control State
+  const [dimmerActive, setDimmerActive] = useState(false);
+  const [dateOptionSelect, setDateOptionSelect] = useState(oddDateOptions);
+
   const handleChange = (e, { name, value }) => {
     switch (name) {
       case "phoneNumber":
@@ -64,18 +68,69 @@ function Registration() {
         return;
       case "month":
         setMonth(value);
+        handleMonthChange(value);
         return;
       case "date":
         setDate(value);
         return;
       case "year":
         setYear(value);
+        handleYearChange(value);
         return;
       case "email":
         setEmail(value);
         return;
       default:
         return;
+    }
+  };
+
+  const handleMonthChange = monthValue => {
+    let yearValue = parseInt(year);
+    let yearReminder = yearValue % 4;
+    let oddDateMonths = [1, 3, 5, 8, 10, 12];
+    let evenDateMonths = [4, 6, 7, 9, 11];
+    if (yearValue !== 2 && oddDateMonths.includes(parseInt(monthValue))) {
+      setDateOptionSelect(oddDateOptions);
+    } else if (
+      yearValue !== 2 &&
+      evenDateMonths.includes(parseInt(monthValue))
+    ) {
+      setDateOptionSelect(evenDateOptions);
+    }
+    if (parseInt(monthValue) === 2 && yearReminder === 0) {
+      setDateOptionSelect(februaryKabisatDateOptions);
+    }
+    if (parseInt(monthValue) === 2 && yearReminder !== 0) {
+      setDateOptionSelect(februaryDateOptions);
+    }
+  };
+
+  const handleYearChange = value => {
+    let yearValue = parseInt(value);
+    let yearReminder = yearValue % 4;
+    let monthValue = parseInt(month);
+    let oddDateMonths = [1, 3, 5, 8, 10, 12];
+    let evenDateMonths = [4, 6, 7, 9, 11];
+    if (yearValue === 2 && yearReminder === 0) {
+      setDateOptionSelect(februaryKabisatDateOptions);
+    }
+    if (yearValue === 2 && yearReminder !== 0) {
+      setDateOptionSelect(februaryDateOptions);
+    }
+    if (yearValue !== 2 && oddDateMonths.includes(parseInt(monthValue))) {
+      setDateOptionSelect(oddDateOptions);
+    } else if (
+      yearValue !== 2 &&
+      evenDateMonths.includes(parseInt(monthValue))
+    ) {
+      setDateOptionSelect(evenDateOptions);
+    }
+    if (parseInt(monthValue) === 2 && yearReminder === 0) {
+      setDateOptionSelect(februaryKabisatDateOptions);
+    }
+    if (parseInt(monthValue) === 2 && yearReminder !== 0) {
+      setDateOptionSelect(februaryDateOptions);
     }
   };
 
@@ -144,6 +199,7 @@ function Registration() {
       <Segment>
         <Header as="h2">Registration</Header>
         <Form>
+          <Dimmer active={dimmerActive} />
           <Form.Input
             error={errorPhoneNumber}
             fluid
@@ -178,16 +234,14 @@ function Registration() {
                   name="month"
                   options={monthsOptions}
                   placeholder="Month"
-                  error
                   onChange={handleChange}
                 />
               </Grid.Column>
               <Grid.Column>
                 <Form.Select
                   name="date"
-                  options={oddDateOptions}
+                  options={dateOptionSelect}
                   placeholder="Date"
-                  error
                   onChange={handleChange}
                 />
               </Grid.Column>
@@ -196,7 +250,6 @@ function Registration() {
                   name="year"
                   options={yearOptions}
                   placeholder="Year"
-                  error
                   onChange={handleChange}
                 />
               </Grid.Column>
@@ -232,9 +285,10 @@ function Registration() {
             name="email"
             onChange={handleChange}
           />
-
-          <Form.Button onClick={handleSubmit}>Register</Form.Button>
         </Form>
+        <br />
+        <Button onClick={handleSubmit}>Register</Button>
+        <br />
         <strong>onChange:</strong>
         <pre>
           {JSON.stringify(
