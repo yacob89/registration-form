@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Segment,
   Header,
@@ -290,7 +291,7 @@ function Registration() {
   };
 
   return (
-    <div>
+    <div style={{ marginLeft: "15%", marginRight: "15%", marginTop: "5%" }}>
       <Segment>
         <Dimmer active={loginDimmerActive}>
           <Label color={"purple"}>Registration Completed!</Label>
@@ -393,7 +394,7 @@ function Registration() {
         <br />
       </Segment>
       <Segment style={{ display: loginButtonVisible, width: "100%" }}>
-        <Button fluid color="purple" onClick={handleSubmit}>
+        <Button as={Link} to="/login" fluid color="purple">
           Login
         </Button>
       </Segment>
