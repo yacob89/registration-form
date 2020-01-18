@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Segment, Header, Grid, Form, Button, Dimmer } from "semantic-ui-react";
+import {
+  Segment,
+  Header,
+  Grid,
+  Form,
+  Button,
+  Dimmer,
+  Label
+} from "semantic-ui-react";
 import {
   evenDateOptions,
   oddDateOptions,
@@ -30,33 +38,16 @@ function Registration() {
   const [errorLastName, setErrorLastName] = useState(false);
   const [errorEmail, setErrorEmail] = useState(false);
 
-  // Submitted Value
-  const [submittedPhoneNumber, setSubmittedPhoneNumber] = useState("");
-  const [submittedFirstName, setSubmittedFirstName] = useState("");
-  const [submittedLastName, setSubmittedLastName] = useState("");
-  const [submittedGender, setSubmittedGender] = useState("");
-  const [submittedDate, setSubmittedDate] = useState("1");
-  const [submittedMonth, setSubmittedMonth] = useState("January");
-  const [submittedYear, setSubmittedYear] = useState("1970");
-  const [submittedEmail, setSubmittedEmail] = useState("");
-
   // UI Control State
   const [dimmerActive, setDimmerActive] = useState(false);
+  const [loginDimmerActive, setLoginDimmerActive] = useState(false);
   const [dateOptionSelect, setDateOptionSelect] = useState(oddDateOptions);
+  const [loginButtonVisible, setLoginButtonVisible] = useState("none");
 
   const handleChange = (e, { name, value }) => {
     switch (name) {
       case "phoneNumber":
         setPhoneNumber(value);
-        /* let phonePrefix = value.substring(0, 4);
-        if (phoneValidator.includes(phonePrefix)) {
-          setErrorPhoneNumber(false);
-        } else {
-          setErrorPhoneNumber({
-            content: "Please enter a valid Indonesian phone number",
-            pointing: "below"
-          });
-        } */
         return;
       case "firstName":
         setFirstName(value);
@@ -181,6 +172,7 @@ function Registration() {
         pointing: "below"
       });
     } else {
+      // eslint-disable-next-line
       let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       let validEmail = re.test(String(email).toLowerCase());
       console.log("Valid email = ", validEmail);
@@ -212,64 +204,83 @@ function Registration() {
   const postRegistration = () => {
     let dateString = year + "-" + month + "-" + date;
     axios
-      .post("http://localhost:8000/users", {
-        phone_number: phoneNumber,
-        first_name: firstName,
-        last_name: lastName,
-        birth_date: dateString,
-        gender: gender,
-        email: email
-      })
+      .post(
+        "http://mitraisserver-env.tecyp2skhk.us-east-2.elasticbeanstalk.com/users",
+        {
+          phone_number: phoneNumber,
+          first_name: firstName,
+          last_name: lastName,
+          birth_date: dateString,
+          gender: gender,
+          email: email
+        }
+      )
       .then(res => {
         console.log("Response from server: ", res);
+        setDimmerActive(false);
+        setLoginDimmerActive(true);
+        setLoginButtonVisible("inline-block");
       })
       .catch(error => {
         console.log("Error: ", error);
+        setDimmerActive(false);
       });
   };
 
   const checkAvailableEmail = () => {
+    setDimmerActive(true);
     axios
-      .get("http://localhost:8000/emails")
+      .get(
+        "http://mitraisserver-env.tecyp2skhk.us-east-2.elasticbeanstalk.com/emails"
+      )
       .then(res => {
         let emails = res.data.values;
         let emailRows = [];
         let i;
-        for(i=0;i<emails.length; i++){
+        for (i = 0; i < emails.length; i++) {
           emailRows.push(emails[i].email);
         }
-        if(emailRows.includes(email)){
+        if (emailRows.includes(email)) {
           setErrorEmail({
-            content: "Email '" + email + "' is already exist. Enter another email address",
+            content:
+              "Email '" +
+              email +
+              "' is already exist. Enter another email address",
             pointing: "below"
           });
-        }
-        else{
+          setDimmerActive(false);
+        } else {
           checkAvailablePhoneNumber();
         }
       })
       .catch(err => {
         console.log("Error: ", err);
+        setDimmerActive(false);
       });
   };
 
   const checkAvailablePhoneNumber = () => {
     axios
-      .get("http://localhost:8000/mobiles")
+      .get(
+        "http://mitraisserver-env.tecyp2skhk.us-east-2.elasticbeanstalk.com/mobiles"
+      )
       .then(res => {
         let mobiles = res.data.values;
         let mobileRows = [];
         let i;
-        for(i=0;i<mobiles.length; i++){
+        for (i = 0; i < mobiles.length; i++) {
           mobileRows.push(mobiles[i].phone_number);
         }
-        if(mobileRows.includes(phoneNumber)){
+        if (mobileRows.includes(phoneNumber)) {
           setErrorPhoneNumber({
-            content: "Phone number '" + phoneNumber + "' is already exist. Enter another phone number",
+            content:
+              "Phone number '" +
+              phoneNumber +
+              "' is already exist. Enter another phone number",
             pointing: "below"
           });
-        }
-        else{
+          setDimmerActive(false);
+        } else {
           postRegistration();
         }
       })
@@ -281,9 +292,14 @@ function Registration() {
   return (
     <div>
       <Segment>
+        <Dimmer active={loginDimmerActive}>
+          <Label color={"purple"}>Registration Completed!</Label>
+        </Dimmer>
         <Header as="h2">Registration</Header>
         <Form>
-          <Dimmer active={dimmerActive} />
+          <Dimmer active={dimmerActive}>
+            <Label color={"purple"}>Loading...</Label>
+          </Dimmer>
           <Form.Input
             error={errorPhoneNumber}
             fluid
@@ -369,27 +385,17 @@ function Registration() {
             name="email"
             onChange={handleChange}
           />
+          <br />
+          <Button fluid color="purple" onClick={handleSubmit}>
+            Register
+          </Button>
         </Form>
         <br />
-        <Button onClick={handleSubmit}>Register</Button>
-        <br />
-        <strong>onChange:</strong>
-        <pre>
-          {JSON.stringify(
-            {
-              phoneNumber,
-              firstName,
-              lastName,
-              gender,
-              month,
-              date,
-              year,
-              email
-            },
-            null,
-            8
-          )}
-        </pre>
+      </Segment>
+      <Segment style={{ display: loginButtonVisible, width: "100%" }}>
+        <Button fluid color="purple" onClick={handleSubmit}>
+          Login
+        </Button>
       </Segment>
     </div>
   );
