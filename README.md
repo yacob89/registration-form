@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/yacob89/registration-form.svg?branch=master)](https://travis-ci.org/yacob89/registration-form)
 
+This project is deployed to: [http://yacob-registration-form.s3-website.us-east-2.amazonaws.com/](http://yacob-registration-form.s3-website.us-east-2.amazonaws.com/).
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

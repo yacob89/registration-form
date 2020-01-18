@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/registration-form/static/css/main.75414077.chunk.css",
-    "main.js": "/registration-form/static/js/main.3c247f2e.chunk.js",
-    "main.js.map": "/registration-form/static/js/main.3c247f2e.chunk.js.map",
-    "runtime-main.js": "/registration-form/static/js/runtime-main.8f958ea8.js",
-    "runtime-main.js.map": "/registration-form/static/js/runtime-main.8f958ea8.js.map",
-    "static/css/2.2a123619.chunk.css": "/registration-form/static/css/2.2a123619.chunk.css",
-    "static/js/2.e488ea7b.chunk.js": "/registration-form/static/js/2.e488ea7b.chunk.js",
-    "static/js/2.e488ea7b.chunk.js.map": "/registration-form/static/js/2.e488ea7b.chunk.js.map",
-    "index.html": "/registration-form/index.html",
-    "precache-manifest.86b0dd84312c8705006564ae87c5f96a.js": "/registration-form/precache-manifest.86b0dd84312c8705006564ae87c5f96a.js",
-    "service-worker.js": "/registration-form/service-worker.js",
-    "static/css/2.2a123619.chunk.css.map": "/registration-form/static/css/2.2a123619.chunk.css.map",
-    "static/css/main.75414077.chunk.css.map": "/registration-form/static/css/main.75414077.chunk.css.map",
-    "static/js/2.e488ea7b.chunk.js.LICENSE": "/registration-form/static/js/2.e488ea7b.chunk.js.LICENSE",
-    "static/media/semantic.min.css": "/registration-form/static/media/outline-icons.ef60a4f6.woff"
+    "main.css": "/static/css/main.75414077.chunk.css",
+    "main.js": "/static/js/main.8ad20ab5.chunk.js",
+    "main.js.map": "/static/js/main.8ad20ab5.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.9e0ccfff.js",
+    "runtime-main.js.map": "/static/js/runtime-main.9e0ccfff.js.map",
+    "static/css/2.c4b83ee6.chunk.css": "/static/css/2.c4b83ee6.chunk.css",
+    "static/js/2.e488ea7b.chunk.js": "/static/js/2.e488ea7b.chunk.js",
+    "static/js/2.e488ea7b.chunk.js.map": "/static/js/2.e488ea7b.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.2ea9d93cc7ef78e6924c7c1e99456a5b.js": "/precache-manifest.2ea9d93cc7ef78e6924c7c1e99456a5b.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.c4b83ee6.chunk.css.map": "/static/css/2.c4b83ee6.chunk.css.map",
+    "static/css/main.75414077.chunk.css.map": "/static/css/main.75414077.chunk.css.map",
+    "static/js/2.e488ea7b.chunk.js.LICENSE": "/static/js/2.e488ea7b.chunk.js.LICENSE",
+    "static/media/semantic.min.css": "/static/media/outline-icons.ef60a4f6.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.8f958ea8.js",
-    "static/css/2.2a123619.chunk.css",
+    "static/js/runtime-main.9e0ccfff.js",
+    "static/css/2.c4b83ee6.chunk.css",
     "static/js/2.e488ea7b.chunk.js",
     "static/css/main.75414077.chunk.css",
-    "static/js/main.3c247f2e.chunk.js"
+    "static/js/main.8ad20ab5.chunk.js"
   ]
 }
