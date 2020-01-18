@@ -9,6 +9,7 @@ import {
   yearOptions,
   phoneValidator
 } from "../utils/Options";
+import axios from "axios";
 import "semantic-ui-css/semantic.min.css";
 import "./Registration.css";
 
@@ -192,6 +193,89 @@ function Registration() {
         setErrorEmail(false);
       }
     }
+
+    if (
+      !errorPhoneNumber &&
+      !errorFirstName &&
+      !errorLastName &&
+      !errorEmail &&
+      phoneNumber !== "" &&
+      firstName !== "" &&
+      lastName !== "" &&
+      email !== ""
+    ) {
+      //postRegistration();
+      checkAvailableEmail();
+    }
+  };
+
+  const postRegistration = () => {
+    let dateString = year + "-" + month + "-" + date;
+    axios
+      .post("http://localhost:8000/users", {
+        phone_number: phoneNumber,
+        first_name: firstName,
+        last_name: lastName,
+        birth_date: dateString,
+        gender: gender,
+        email: email
+      })
+      .then(res => {
+        console.log("Response from server: ", res);
+      })
+      .catch(error => {
+        console.log("Error: ", error);
+      });
+  };
+
+  const checkAvailableEmail = () => {
+    axios
+      .get("http://localhost:8000/emails")
+      .then(res => {
+        let emails = res.data.values;
+        let emailRows = [];
+        let i;
+        for(i=0;i<emails.length; i++){
+          emailRows.push(emails[i].email);
+        }
+        if(emailRows.includes(email)){
+          setErrorEmail({
+            content: "Email '" + email + "' is already exist. Enter another email address",
+            pointing: "below"
+          });
+        }
+        else{
+          checkAvailablePhoneNumber();
+        }
+      })
+      .catch(err => {
+        console.log("Error: ", err);
+      });
+  };
+
+  const checkAvailablePhoneNumber = () => {
+    axios
+      .get("http://localhost:8000/mobiles")
+      .then(res => {
+        let mobiles = res.data.values;
+        let mobileRows = [];
+        let i;
+        for(i=0;i<mobiles.length; i++){
+          mobileRows.push(mobiles[i].phone_number);
+        }
+        if(mobileRows.includes(phoneNumber)){
+          setErrorPhoneNumber({
+            content: "Phone number '" + phoneNumber + "' is already exist. Enter another phone number",
+            pointing: "below"
+          });
+        }
+        else{
+          postRegistration();
+        }
+      })
+      .catch(err => {
+        console.log("Error: ", err);
+      });
   };
 
   return (
