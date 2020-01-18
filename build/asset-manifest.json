@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/registration-form/static/css/main.75414077.chunk.css",
+    "main.js": "/registration-form/static/js/main.3c247f2e.chunk.js",
+    "main.js.map": "/registration-form/static/js/main.3c247f2e.chunk.js.map",
+    "runtime-main.js": "/registration-form/static/js/runtime-main.8f958ea8.js",
+    "runtime-main.js.map": "/registration-form/static/js/runtime-main.8f958ea8.js.map",
+    "static/css/2.2a123619.chunk.css": "/registration-form/static/css/2.2a123619.chunk.css",
+    "static/js/2.e488ea7b.chunk.js": "/registration-form/static/js/2.e488ea7b.chunk.js",
+    "static/js/2.e488ea7b.chunk.js.map": "/registration-form/static/js/2.e488ea7b.chunk.js.map",
+    "index.html": "/registration-form/index.html",
+    "precache-manifest.86b0dd84312c8705006564ae87c5f96a.js": "/registration-form/precache-manifest.86b0dd84312c8705006564ae87c5f96a.js",
+    "service-worker.js": "/registration-form/service-worker.js",
+    "static/css/2.2a123619.chunk.css.map": "/registration-form/static/css/2.2a123619.chunk.css.map",
+    "static/css/main.75414077.chunk.css.map": "/registration-form/static/css/main.75414077.chunk.css.map",
+    "static/js/2.e488ea7b.chunk.js.LICENSE": "/registration-form/static/js/2.e488ea7b.chunk.js.LICENSE",
+    "static/media/semantic.min.css": "/registration-form/static/media/outline-icons.ef60a4f6.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8f958ea8.js",
+    "static/css/2.2a123619.chunk.css",
+    "static/js/2.e488ea7b.chunk.js",
+    "static/css/main.75414077.chunk.css",
+    "static/js/main.3c247f2e.chunk.js"
+  ]
+}
